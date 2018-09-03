@@ -18,7 +18,7 @@ class BNN(nn.Module):
 
     def forward(self, x):
         out = x
-        for l in range(len(self.utils)-1):
+        for l in range(len(self.units)-1):
             # sample w^l
             W = self.mu['w'][l] \
                 + torch.log(1+torch.exp(self.rho['w'][l])) \
@@ -26,8 +26,8 @@ class BNN(nn.Module):
             b = self.mu['b'][l] \
                 + torch.log(1+torch.exp(self.rho['b'][l])) \
                 * self.epsilon(self.mu['b'][l])
-            out = out * W + b
-            if l == len(self.utils)-2:
+            out = out @ W + b
+            if l == len(self.units)-2:
                 return out
             else:
                 out = F.relu(out, inplace=True)
@@ -54,3 +54,9 @@ class BNN(nn.Module):
             layers['b'].append(current_b)
         return layers
 
+# test
+x = torch.ones(10)
+x = x.view(1, 10)
+net = BNN(10, [5,3], 2)
+y = net(x)
+print(y)

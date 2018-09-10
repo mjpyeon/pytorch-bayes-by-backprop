@@ -5,21 +5,6 @@ import torch.nn.functional as F
 import torchvision as tv
 from torch.utils.data import DataLoader
 
-def get_pi(nb_batches, curr_batch):
-    ratio = math.pow(2, nb_batches - curr_batch)
-    ratio /= math.pow(2, nb_batches) -1
-    return ratio
-
-def sampled_loss(model, x, y, nb_samples):
-    pw, qw, mle = 0., 0., 0.
-    for _ in range(nb_samples):
-        output = model(x)
-        pw += model.get_pw()
-        qw += model.get_qw()
-        mle += F.nll_loss(output, y)
-    return pw/nb_samples, qw/nb_samples, mle/nb_samples
-
-
 def train(bnn, train_data, test_data, nb_samples,
           nb_epochs=20, train_batch_size=128,
           test_batch_size=1000,

@@ -2,7 +2,7 @@
 PyTorch implementation of Bayes-by-Backprop<br>
 ### 1. Gaussian Prior for MNIST dataset
 <code>
-python run_mnist.py
+python run_mnist.py <br>
 </code>
 ### 2. Mixture Prior for MNIST dataset
 to be implemented

@@ -4,5 +4,6 @@ PyTorch implementation of Bayes-by-Backprop<br>
 <code>
 python run_mnist.py <br>
 </code>
+
 ### 2. Mixture Prior for MNIST dataset
 to be implemented
